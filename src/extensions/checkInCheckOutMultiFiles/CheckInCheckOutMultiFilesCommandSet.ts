@@ -18,8 +18,8 @@ import * as strings from 'CheckInCheckOutMultiFilesCommandSetStrings';
  */
 export interface ICheckInCheckOutMultiFilesCommandSetProperties {
   // This is an example; replace with your own properties
-  sampleTextOne: string;
-  sampleTextTwo: string;
+  //sampleTextOne: string;
+  //sampleTextTwo: string;
 }
 
 const LOG_SOURCE: string = 'CheckInCheckOutMultiFilesCommandSet';

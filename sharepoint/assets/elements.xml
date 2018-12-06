@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+ <CustomAction 
+        Title="CheckInCheckOutFiles"
+        RegistrationId="101"
+        RegistrationType="List"
+        Location="ClientSideExtension.ListViewCommandSet.CommandBar"
+        ClientSideComponentId="07a2ed22-fccf-461e-9180-274a29f6b90a"
+        ClientSideComponentProperties="">
+    </CustomAction>
+</Elements>
