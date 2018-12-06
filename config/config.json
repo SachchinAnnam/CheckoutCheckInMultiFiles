@@ -1,0 +1,18 @@
+{
+  "$schema": "https://dev.office.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "check-in-check-out-multi-files-command-set": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/checkInCheckOutMultiFiles/CheckInCheckOutMultiFilesCommandSet.js",
+          "manifest": "./src/extensions/checkInCheckOutMultiFiles/CheckInCheckOutMultiFilesCommandSet.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "CheckInCheckOutMultiFilesCommandSetStrings": "lib/extensions/checkInCheckOutMultiFiles/loc/{locale}.js"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://dev.office.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "check-in-check-out-files-client-side-solution",
+    "id": "b686a5a0-1f5a-4355-99ed-c6f8e9acdfe5",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true
+  },
+  "paths": {
+    "zippedPackage": "solution/check-in-check-out-files.sppkg"
+  }
+}

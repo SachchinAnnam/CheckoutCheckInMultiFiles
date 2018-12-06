@@ -1,0 +1,8 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "version": "1.4.1",
+    "libraryName": "check-in-check-out-files",
+    "libraryId": "b686a5a0-1f5a-4355-99ed-c6f8e9acdfe5",
+    "environment": "spo"
+  }
+}
