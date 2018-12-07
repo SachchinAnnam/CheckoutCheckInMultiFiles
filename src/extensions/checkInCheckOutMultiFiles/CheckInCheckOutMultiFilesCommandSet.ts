@@ -29,9 +29,8 @@ export default class CheckInCheckOutMultiFilesCommandSet extends BaseListViewCom
   @override
   public onInit(): Promise<void> {
     Log.info(LOG_SOURCE, 'Initialized CheckInCheckOutMultiFilesCommandSet');
-    //     sp.setup({
-    //    spfxContext: this.context
-    //  });
+    SPComponentLoader.loadCss('https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css');
+
     return Promise.resolve();
   }
 
@@ -39,13 +38,13 @@ export default class CheckInCheckOutMultiFilesCommandSet extends BaseListViewCom
   public onListViewUpdated(event: IListViewCommandSetListViewUpdatedParameters): void {
     const CheckInCommand: Command = this.tryGetCommand('CheckIn_Files');
     const CheckOutCommand: Command = this.tryGetCommand('CheckOut_Files');
-
+    
     let ShowCheckIn: boolean = false;
     let ShowCheckOut: boolean = false;
     if (event.selectedRows.length > 1) {
       for (let row of event.selectedRows) {
         let CheckoutUserID: string = row.getValueByName('CheckedOutUserId');
-        console.log(CheckoutUserID)
+        
         if (CheckoutUserID === "") {
           ShowCheckIn = false;
           ShowCheckOut = true;
@@ -59,6 +58,9 @@ export default class CheckInCheckOutMultiFilesCommandSet extends BaseListViewCom
 
 
       if (CheckInCommand) {
+
+        
+
         if (ShowCheckIn) {
           CheckInCommand.visible = true;
           CheckOutCommand.visible = false;
@@ -67,14 +69,6 @@ export default class CheckInCheckOutMultiFilesCommandSet extends BaseListViewCom
           CheckOutCommand.visible = true;
           CheckInCommand.visible = false;
         }
-        // This command should be hidden unless exactly one row is selected.
-        // CheckInCommand.visible = event.selectedRows.length > 1;
-        // if (!CheckInCommand.visible) {
-        //   CheckOutCommand.visible = event.selectedRows.length > 1;
-        // }
-        // else {
-        //   CheckOutCommand.visible = false;
-        // }
       }
     }
     else {
@@ -86,45 +80,24 @@ export default class CheckInCheckOutMultiFilesCommandSet extends BaseListViewCom
 
   @override
   public onExecute(event: IListViewCommandSetExecuteEventParameters): void {
+
+    let siteUrl: string = this.context.pageContext.web.absoluteUrl;
+    let listName: string = `${this.context.pageContext.list.serverRelativeUrl}`.split("/").pop();
+    let ItemurlArr: string[] = [];
+    if (event.selectedRows.length > 1) {
+      for (let row of event.selectedRows) {
+        let itemName: string = row.getValueByName('FileLeafRef');
+        let fullItemUrl: string = `/${listName}/${itemName}`;
+        ItemurlArr.push(fullItemUrl);
+      }
+    }
+
     switch (event.itemId) {
       case 'CheckIn_Files':
-        //Dialog.alert(`${this.properties.sampleTextOne}`);
-        console.log(event.selectedRows);
-        let siteUrl: string = this.context.pageContext.web.absoluteUrl;
-        let listName: string = `${this.context.pageContext.list.serverRelativeUrl}`.split("/").pop();
-        let ItemurlArr: string[] = [];
-        if (event.selectedRows.length > 1) {
-          for (let row of event.selectedRows) {
-            let itemName: string = row.getValueByName('FileLeafRef');
-            let CheckoutUserID: string = row.getValueByName('CheckedOutUserId');
-
-            let fullItemUrl: string = `/${listName}/${itemName}`;
-            ItemurlArr.push(fullItemUrl);
-          }
-
-          console.log(ItemurlArr);
-          this.CheckInFiles(siteUrl, listName, ItemurlArr)
-        }
-
+        this.CheckInFiles(siteUrl, listName, ItemurlArr)
         break;
       case 'CheckOut_Files':
-        siteUrl = this.context.pageContext.web.absoluteUrl;
-        listName = `${this.context.pageContext.list.serverRelativeUrl}`.split("/").pop();
-        ItemurlArr = [];
-        if (event.selectedRows.length > 1) {
-          for (let row of event.selectedRows) {
-            let itemName: string = row.getValueByName('FileLeafRef');
-            let CheckoutUserID: string = row.getValueByName('CheckedOutUserId');
-
-            let fullItemUrl: string = `/${listName}/${itemName}`;
-            ItemurlArr.push(fullItemUrl);
-          }
-
-          console.log(ItemurlArr);
-          this.CheckOutFiles(siteUrl, listName, ItemurlArr)
-        }
-
-
+        this.CheckOutFiles(siteUrl, listName, ItemurlArr);
         break;
       default:
         throw new Error('Unknown command');
@@ -134,15 +107,11 @@ export default class CheckInCheckOutMultiFilesCommandSet extends BaseListViewCom
   private CheckOutFiles(siteurl: string, listName: string, ItemurlArr: any) {
     let filecount = 0;
     for (let Item of ItemurlArr) {
-      console.log(Item);
-
       sp.web.getFileByServerRelativeUrl(Item).checkout().then(data => {
-        console.log('Check out done.');
         filecount++;
         this.Refreshpage(filecount, ItemurlArr.length);
 
       }).catch(data => {
-        console.log('Failed Check out done.');
         filecount++;
         this.Refreshpage(filecount, ItemurlArr.length);
       });
@@ -151,20 +120,37 @@ export default class CheckInCheckOutMultiFilesCommandSet extends BaseListViewCom
 
   private CheckInFiles(siteurl: string, listName: string, ItemurlArr: any) {
     let filecount = 0;
-    for (let Item of ItemurlArr) {
-      console.log(Item);
+    let checkInComment: string;
+    let options = {
 
-      sp.web.getFileByServerRelativeUrl(Item).checkin("Check In the files using spfx").then(data => {
-        console.log('Check In done.');
-        filecount++;
-        this.Refreshpage(filecount, ItemurlArr.length);
-
-      }).catch(data => {
-        console.log('Failed Check out done.');
-        filecount++;
-        this.Refreshpage(filecount, ItemurlArr.length);
-      });
     }
+    Dialog.prompt(`Enter Check In Comment:`).then((value: string) => {
+      checkInComment = value;
+
+      for (let Item of ItemurlArr) {
+        sp.web.getFileByServerRelativeUrl(Item).checkin(checkInComment).then(data => {
+          filecount++;
+          this.Refreshpage(filecount, ItemurlArr.length);
+        }).catch(data => {
+          filecount++;
+          this.Refreshpage(filecount, ItemurlArr.length);
+        });
+      }
+    });
+  }
+
+  private GetselectedItems(event: IListViewCommandSetExecuteEventParameters, listName: string): Promise<string[]> {
+    return new Promise((resolve) => {
+      let ItemurlArr: string[] = [];
+      if (event.selectedRows.length > 1) {
+        for (let row of event.selectedRows) {
+          let itemName: string = row.getValueByName('FileLeafRef');
+          let fullItemUrl: string = `/${listName}/${itemName}`;
+          ItemurlArr.push(fullItemUrl);
+        }
+        resolve(ItemurlArr);
+      }
+    });
   }
 
   private Refreshpage(filecount: number, arrayno: number) {
@@ -172,5 +158,4 @@ export default class CheckInCheckOutMultiFilesCommandSet extends BaseListViewCom
       location.reload();
     }
   }
-
 }

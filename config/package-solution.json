@@ -5,16 +5,16 @@
     "id": "b686a5a0-1f5a-4355-99ed-c6f8e9acdfe5",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
-    "skipFeatureDeployment": true,
     "features": [
       {
-        "title": "Check In Check Out Custom Action.",
+        "title": "Check In Check Out Custom Action",
         "description": "Deploys a custom action with ClientSideComponentId association",
         "id": "5be123e1-be1b-4dc8-1fe6-1233871eeb7c",
         "version": "1.0.0.0",
         "assets": {
           "elementManifests": [
-            "elements.xml"
+            "elements.xml",
+            "ClientSideInstance.xml"
           ]
         }
       }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <ClientSideComponentInstance
+        Title="check-in-check-out-files"
+        ListTemplateId="101"
+        Location="ClientSideExtension.ListViewCommandSet.CommandBar"
+        ComponentId="07a2ed22-fccf-461e-9180-274a29f6b90a"
+        Properties="">
+    </ClientSideComponentInstance>
+</Elements>

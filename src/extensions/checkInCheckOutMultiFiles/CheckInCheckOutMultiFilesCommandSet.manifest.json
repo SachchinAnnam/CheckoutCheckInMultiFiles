@@ -17,13 +17,13 @@
 
   "items": {
     "CheckIn_Files": {
-      "title": { "default": "Check In" },
-      "iconImageUrl": "icons/request.png",
+      "title": { "default": "Multi Check In" },
+      "iconImageUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAMAAADXT/YiAAAAM1BMVEUQfBARfREniScqiiowjTBiqWJjqmNlq2VsrmxxsXF3tXeNwI2OwY6byJv6/Pr+/v7////RdFvqAAAAAWJLR0QQlbINLAAAAC1JREFUCB1twUkCABAMA8Cgdtr8/7XU2Qz+dkFscF1rMjxZF3EFkUnCDSOJrwMoPwD6j7oXaQAAAABJRU5ErkJggg==",
       "type": "command"
     },
     "CheckOut_Files": {
-      "title": { "default": "Check Out" },
-      "iconImageUrl": "icons/cancel.png",
+      "title": { "default": "Multi Check Out" },
+      "iconImageUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAMAAADXT/YiAAAAM1BMVEUQfBARfREniScqiiowjTBiqWJjqmNlq2VsrmxxsXF3tXeNwI2OwY6byJv6/Pr+/v7////RdFvqAAAAAWJLR0QQlbINLAAAAC1JREFUCB1twUkCABAMA8Cgdtr8/7XU2Qz+dkFscF1rMjxZF3EFkUnCDSOJrwMoPwD6j7oXaQAAAABJRU5ErkJggg==",
       "type": "command"
     }
   }
