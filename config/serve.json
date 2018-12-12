@@ -4,14 +4,11 @@
   "https": true,
   "serveConfigurations": {
     "default": {
-      "pageUrl": "https://contoso.sharepoint.com/sites/mySite/SitePages/myPage.aspx",
+      "pageUrl": "https://o365ops.sharepoint.com/sites/DevCom/Shared%20Documents/Forms/AllItems.aspx",
       "customActions": {
         "07a2ed22-fccf-461e-9180-274a29f6b90a": {
           "location": "ClientSideExtension.ListViewCommandSet.CommandBar",
-          "properties": {
-            "sampleTextOne": "One item is selected in the list",
-            "sampleTextTwo": "This command is always visible."
-          }
+          "properties": {  }
         }
       }
     },
@@ -20,10 +17,7 @@
       "customActions": {
         "07a2ed22-fccf-461e-9180-274a29f6b90a": {
           "location": "ClientSideExtension.ListViewCommandSet.CommandBar",
-          "properties": {
-            "sampleTextOne": "One item is selected in the list",
-            "sampleTextTwo": "This command is always visible."
-          }
+          "properties": {}
         }
       }
     }

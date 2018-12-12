@@ -30,7 +30,7 @@ export default class CheckInCheckOutMultiFilesCommandSet extends BaseListViewCom
   public onInit(): Promise<void> {
     Log.info(LOG_SOURCE, 'Initialized CheckInCheckOutMultiFilesCommandSet');
     SPComponentLoader.loadCss('https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css');
-
+    
     return Promise.resolve();
   }
 
@@ -38,6 +38,7 @@ export default class CheckInCheckOutMultiFilesCommandSet extends BaseListViewCom
   public onListViewUpdated(event: IListViewCommandSetListViewUpdatedParameters): void {
     const CheckInCommand: Command = this.tryGetCommand('CheckIn_Files');
     const CheckOutCommand: Command = this.tryGetCommand('CheckOut_Files');
+    
     
     let ShowCheckIn: boolean = false;
     let ShowCheckOut: boolean = false;
@@ -58,9 +59,6 @@ export default class CheckInCheckOutMultiFilesCommandSet extends BaseListViewCom
 
 
       if (CheckInCommand) {
-
-        
-
         if (ShowCheckIn) {
           CheckInCommand.visible = true;
           CheckOutCommand.visible = false;
@@ -86,9 +84,11 @@ export default class CheckInCheckOutMultiFilesCommandSet extends BaseListViewCom
     let ItemurlArr: string[] = [];
     if (event.selectedRows.length > 1) {
       for (let row of event.selectedRows) {
+        console.log(row);
         let itemName: string = row.getValueByName('FileLeafRef');
-        let fullItemUrl: string = `/${listName}/${itemName}`;
-        ItemurlArr.push(fullItemUrl);
+        let itemurl:string= row.getValueByName('FileRef');
+        //let fullItemUrl: string = `/${listName}/${itemName}`;
+        ItemurlArr.push(itemurl);
       }
     }
 
@@ -145,8 +145,8 @@ export default class CheckInCheckOutMultiFilesCommandSet extends BaseListViewCom
       if (event.selectedRows.length > 1) {
         for (let row of event.selectedRows) {
           let itemName: string = row.getValueByName('FileLeafRef');
-          let fullItemUrl: string = `/${listName}/${itemName}`;
-          ItemurlArr.push(fullItemUrl);
+          let itemurl:string= row.getValueByName('FileRef');
+          ItemurlArr.push(itemurl);
         }
         resolve(ItemurlArr);
       }
