@@ -3,7 +3,7 @@
 ## Summary
 As I know, Modern Document library is not provide multiple files check-in/check-out features like we are do into our Classic document library. The Sample SPFx extension to demonstrate the functionality of multiple check-in/check-out documents.
 
-![SPFx ListView Extension](https://github.com/vipulkelkar/sp-dev-fx-webparts/blob/ReduxFormSample/samples/react-reduxform/assets/ReduxFormWebpart.gif)
+![SPFx ListView Extension](https://github.com/rajput9997/CheckoutCheckInMultiFiles/blob/master/sharepoint/assets/multicheckin-checkout-extension.gif)
 
 ## Applies to
 
